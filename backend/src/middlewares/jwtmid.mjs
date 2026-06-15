@@ -5,7 +5,7 @@ class Middleware {
 		let token;
 		if (req.headers.authorization && req.headers.authorization('Bearer')) {
 			token = req.headers.authorization.split(' ')[1];
-		} else if (re.cookies && req.cookies.jwt) {
+		} else if (req.cookies && req.cookies.jwt) {
 			token = req.cookies.jwt
 		}
 		if (!token) {

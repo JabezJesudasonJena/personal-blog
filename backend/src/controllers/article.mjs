@@ -29,7 +29,7 @@ class ArticleController{
 				id: Number(req.params.id) || req.body.id
 			}
 		});
-		return res.status(204).json({
+		return res.status(200).json({
 			success: true,
 			data: prismaArticle
 		})

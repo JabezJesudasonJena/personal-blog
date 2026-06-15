@@ -3,6 +3,7 @@ import cors from "cors";
 import prisma from "./db/prisma.js";
 import dotenv from "dotenv"
 import router from "./routes/route.mjs"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 4001;
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser());
 app.use("/api", router);
 
 app.get("/", (req, res) => {
