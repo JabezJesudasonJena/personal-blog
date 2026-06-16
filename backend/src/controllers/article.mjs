@@ -16,7 +16,11 @@ class ArticleController{
 	};
 	
 	static async getAllArticles(req, res) {
-		const prismaArticles = await prisma.Article.findAll({});
+		const prismaArticles = await prisma.Article.findMany({
+			select: {
+				authorId: false, id: true, title: true, content: true
+			}
+		});
 		return res.status(200).json({
 			success: true,
 			data: prismaArticles
@@ -48,7 +52,7 @@ class ArticleController{
 	};
 
 	static async editArticle(req, res) {
-		const { articleId } = req.params.id;
+		const articleId  = Number(req.params.id);
 		const updatedArticle = await prisma.Article.update({
 			where: { id: articleId },
 			data: req.body
