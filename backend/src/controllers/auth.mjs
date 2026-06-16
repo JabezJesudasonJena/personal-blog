@@ -31,6 +31,9 @@ class AuthController {
 		const passwordMatch = await bcrypt.compare(pass, prismaUser.pass);
 		if (!passwordMatch) return res.status(400).json({ success: false, message: "Invalid Credentials" });
 		const token = jwt.sign({ id: prismaUser.id, role: prismaUser.role }, process.env.JWT_SECRET);
+		res.cookie('jwt', token, {
+			httpOnly: true
+		});
 		return res.status(200).json({
 			success: true,
 			token: token
